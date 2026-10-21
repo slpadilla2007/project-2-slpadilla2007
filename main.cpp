@@ -8,8 +8,10 @@ using namespace std;
 class Student {
 
 	private:
+		//All vars needed for both art and physics students
 		string firstName;
 		string lastName;
+		//I added an ID variable because I felt that could be important
 		int studentID;
 		double gpa;
 		int enrollYear;
@@ -18,6 +20,7 @@ class Student {
 		string gradSem;
 		string studType;
 	public:
+		//Default constructor
 		Student() {
 			firstName = "fn";
 			lastName = "ln";
@@ -29,11 +32,17 @@ class Student {
 			gradSem = "N/A";
 			studType = "N/A";
 		}
+		//Default destructor
 		~Student() {}
-		void setName_ID(string fN, string lN, int ID) {
+		//All needed setter functions
+		void setName(string fN, string lN) {
 			firstName = fN;
 			lastName = lN;
-			studentID = ID;
+		}
+		void setName_ID(string fN, string lN, int IDnum) {
+			firstName = fN;
+			lastName = lN;
+			studentID = IDnum;
 		}
 		void setGPA(double newGPA) {
 			gpa = newGPA;
@@ -88,7 +97,7 @@ class Student {
 		}
 		void setAll(string fN,
 			    string lN,
-			    int ID, 
+			    int IDnum,
 			    double newGPA,
 			    int eYear,
 			    int gYear,
@@ -97,7 +106,7 @@ class Student {
 			    int type) {
 			firstName = fN;
 			lastName = lN;
-			studentID = ID;
+			studentID = IDnum;
 			gpa = newGPA;
 			enrollYear = eYear;
 			gradYear = gYear;
@@ -141,6 +150,8 @@ class Student {
 					studType = "N/A";
 			}
 		}
+
+		//All needed getter functions
 		string getFirstName() { return firstName; }
 		string getLastName() { return lastName; }
 		string getFullName() { return firstName + " " + lastName }
@@ -157,11 +168,14 @@ class Student {
 class ArtStudent : public Student {
 
 	private:
+		//Needed variable for art students
 		string artEmphasis;
 	public:
+		//Default constructor
 		ArtStudent() : Student() {
 			artEmphasis = "N/A";
 		}
+		//Needed setter function
 		void setEmphasis(int emph) {
 			switch (emph) {
 				case 1:
@@ -177,6 +191,7 @@ class ArtStudent : public Student {
 					artEmphasis = "N/A";
 			}
 		}
+		//Needed getter function
 		string getEmphasis() { return artEmphasis; }
 
 };
@@ -184,11 +199,14 @@ class ArtStudent : public Student {
 class PhysicsStudent : public Student {
 
 	private:
+		//Needed variable for physics students
 		string concentration;
 	public:
+		//Default constructor
 		PhysicsStudent() : Student() {
 			concentration = "N/A";
 		}
+		//Needed setter function
 		void setConcentration(int con) {
 			concentration.clear();
 			switch (con) {
@@ -202,12 +220,36 @@ class PhysicsStudent : public Student {
 					concentration = "N/A";
 			}
 		}
+		//Needed getter function
 		string getConcentration() { return concentration; }
 
 };
 
 int main() {
 
-	//Code will go here
+	vector<ArtStudent *> artStudents;
+	vector<PhysicsStudent *> physicsStudents;
+	for (int i = 0; i < 5; i++) {
+		artStudents.push_back(new ArtStudent);
+		physicsStudents.push_back(new PhysicsStudent);
+	}
+	//This first art student is for demonstration of the setter funcs
+	artStudents[0]->setName_ID("Laura", "Johnson", 48472);
+	artStudents[0]->setGPA(3.6);
+	artStudents[0]->setEnroll(2024, 1, 1);
+	artStudents[0]->setGrad(2028, 2);
+	artStudents[0]->setEmphasis(2);
+	//For all the others, I'll use the setAll func
+	artStudents[1]->setAll("Dahlia", "Lianne", 68892, 3.8, 2021, 2026, 2, 1, 2);
+	artStudents[1]->setEmphasis(1);
+
+	artStudents[2]->setAll("Nik", "Natalia", 54715, 2.7, 2023, 2027, 1, 3, 1);
+	artStudents[2]->setEmphasis(3);
+	
+	artStudents[3]->setAll("Dana", "Lennart", 37567, 4.1, 2026, 2030, 1, 2, 1);
+	artStudents[3]->setEmphasis(3);
+	
+	artStudents[4]->setAll("Grady", "Hayden", 71524, 1.0, 2010, 2029, 3, 3, 1);
+	artStudents[4]->setEmphasis(1);
 
 }

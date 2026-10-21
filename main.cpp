@@ -208,7 +208,6 @@ class PhysicsStudent : public Student {
 		}
 		//Needed setter function
 		void setConcentration(int con) {
-			concentration.clear();
 			switch (con) {
 				case 1:
 					concentration = "Biophysics";
@@ -226,19 +225,23 @@ class PhysicsStudent : public Student {
 };
 
 int main() {
-
+	
+	//Two needed vectors for art and physics students
 	vector<ArtStudent *> artStudents;
-	vector<PhysicsStudent *> physicsStudents;
+	vector<PhysicsStudent *> physStudents;
+	//Allocates all needed memory
 	for (int i = 0; i < 5; i++) {
 		artStudents.push_back(new ArtStudent);
-		physicsStudents.push_back(new PhysicsStudent);
+		physStudents.push_back(new PhysicsStudent);
 	}
+	//All 5 art students
 	//This first art student is for demonstration of the setter funcs
 	artStudents[0]->setName_ID("Laura", "Johnson", 48472);
 	artStudents[0]->setGPA(3.6);
 	artStudents[0]->setEnroll(2024, 1, 1);
 	artStudents[0]->setGrad(2028, 2);
 	artStudents[0]->setEmphasis(2);
+
 	//For all the others, I'll use the setAll func
 	artStudents[1]->setAll("Dahlia", "Lianne", 68892, 3.8, 2021, 2026, 2, 1, 2);
 	artStudents[1]->setEmphasis(1);
@@ -251,5 +254,37 @@ int main() {
 	
 	artStudents[4]->setAll("Grady", "Hayden", 71524, 1.0, 2010, 2029, 3, 3, 1);
 	artStudents[4]->setEmphasis(1);
+	
+	//All 5 physics students
+	physStudents[0]->setAll("Caty", "Duncan", 17566, 4.99, 2025, 2027, 1, 3, 1);
+	physStudents[0]->setConcentration(1);
+
+	physStudents[1]->setAll("Derek", "Fuller", 77807, 2.0, 2022, 2026, 2, 2, 2);
+	physStudents[1]->setConcentration(1);
+
+	physStudents[2]->setAll("Al", "Erickson", 37097, 3.5, 2024, 2028, 1, 3, 2);
+	physStudents[2]->setConcentration(2);
+
+	physStudents[3]->setAll("Terrancy", "Rowe", 25939, 3.6, 2025, 2030, 2, 1, 1);
+	physStudents[3]->setConcentration(1);
+
+	physStudents[4]->setAll("Ted", "Walton", 44522, 4.0, 2023, 2027, 3, 1, 1);
+	physStudents[4]->setConcentration(2);
+
+	ofstream StudData("student_info.dat");
+
+	for (int i = 0; i < artStudents.size(); i++) {
+		StudData << artStudents[i]->getFullName() << ", "
+			<< artStudents[i]->getID() << ", "
+			<< artStudents[i]->getGPA() << ", "
+			<< artStudents[i]->getEYear() << ", "
+			<< artStudents[i]->getGYear() << ", "
+			<< artStudents[i]->getESem() << ", "
+			<< artStudents[i]->getGSem() << ", "
+			<< artStudents[i]->getStudType() << ", "
+			<< artStudents[i]->getEmphasis() << endl;
+	}
+
+	return 0;
 
 }

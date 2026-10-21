@@ -302,11 +302,11 @@ int main() {
 
 	//Closes data file
 	StudData.close();
-
+	
+	//Deletes all allocated memory
 	for (int i = 0; i < artStudents.size(); i++) {
 		delete artStudents[i];
 	}
-
 	for (int i = 0; i < physStudents.size(); i++) {
 		delete physStudents[i];
 	}

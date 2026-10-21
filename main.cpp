@@ -24,7 +24,7 @@ class Student {
 		Student() {
 			firstName = "fn";
 			lastName = "ln";
-			studentId = 0;
+			studentID = 0;
 			gpa = 0.0;
 			enrollYear = 2026;
 			gradYear = 2030;
@@ -154,7 +154,7 @@ class Student {
 		//All needed getter functions
 		string getFirstName() { return firstName; }
 		string getLastName() { return lastName; }
-		string getFullName() { return firstName + " " + lastName }
+		string getFullName() { return firstName + " " + lastName; }
 		int getID() { return studentID; }
 		double getGPA() { return gpa;}
 		int getEYear() { return enrollYear;}
@@ -270,9 +270,11 @@ int main() {
 
 	physStudents[4]->setAll("Ted", "Walton", 44522, 4.0, 2023, 2027, 3, 1, 1);
 	physStudents[4]->setConcentration(2);
-
+	
+	//Makes and opens .dat file
 	ofstream StudData("student_info.dat");
 
+	//Writes all art student data to file
 	for (int i = 0; i < artStudents.size(); i++) {
 		StudData << artStudents[i]->getFullName() << ", "
 			<< artStudents[i]->getID() << ", "
@@ -285,6 +287,7 @@ int main() {
 			<< artStudents[i]->getEmphasis() << endl;
 	}
 	
+	//Writes all physics student data to file
 	for (int i = 0; i < physStudents.size(); i++) {
 		StudData << physStudents[i]->getFullName() << ", "
 			<< physStudents[i]->getID() << ", "
@@ -297,8 +300,18 @@ int main() {
 			<< physStudents[i]->getConcentration() << endl;
 	}
 
+	//Closes data file
 	StudData.close();
 
+	for (int i = 0; i < artStudents.size(); i++) {
+		delete artStudents[i];
+	}
+
+	for (int i = 0; i < physStudents.size(); i++) {
+		delete physStudents[i];
+	}
+
+	//Code done yippe yayyy :)
 	return 0;
 
 }

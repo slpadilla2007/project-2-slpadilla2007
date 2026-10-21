@@ -284,6 +284,20 @@ int main() {
 			<< artStudents[i]->getStudType() << ", "
 			<< artStudents[i]->getEmphasis() << endl;
 	}
+	
+	for (int i = 0; i < physStudents.size(); i++) {
+		StudData << physStudents[i]->getFullName() << ", "
+			<< physStudents[i]->getID() << ", "
+			<< physStudents[i]->getGPA() << ", "
+			<< physStudents[i]->getEYear() << ", "
+			<< physStudents[i]->getGYear() << ", "
+			<< physStudents[i]->getESem() << ", "
+			<< physStudents[i]->getGSem() << ", "
+			<< physStudents[i]->getStudType() << ", "
+			<< physStudents[i]->getConcentration() << endl;
+	}
+
+	StudData.close();
 
 	return 0;
 
